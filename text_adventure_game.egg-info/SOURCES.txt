@@ -5,7 +5,6 @@ game/ascii_art.py
 game/combat.py
 game/commands.py
 game/crafting.py
-game/engine.py
 game/models.py
 game/quests.py
 game/save_system.py

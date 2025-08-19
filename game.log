@@ -38,3 +38,11 @@
 2025-08-18 19:52:36,826 - game.world_builder - INFO - Game world created successfully
 2025-08-18 19:52:36,826 - game.engine - INFO - Game engine initialized
 2025-08-18 19:52:40,687 - __main__ - INFO - Game ended
+2025-08-18 19:55:13,255 - __main__ - INFO - Starting text adventure game
+2025-08-18 19:55:13,256 - game.world_builder - INFO - Game world created successfully
+2025-08-18 19:55:13,256 - game.engine - INFO - Game engine initialized
+2025-08-18 19:55:20,865 - __main__ - INFO - Game ended
+2025-08-18 19:55:36,612 - __main__ - INFO - Starting text adventure game
+2025-08-18 19:55:36,612 - game.world_builder - INFO - Game world created successfully
+2025-08-18 19:55:36,612 - game.engine - INFO - Game engine initialized
+2025-08-18 19:55:56,069 - __main__ - INFO - Game ended
