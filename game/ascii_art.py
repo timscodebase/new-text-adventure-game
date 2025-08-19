@@ -148,20 +148,20 @@ class ASCIIArt:
         "goblin": [
             """
                 ╭─────────╮
-               ╱  👹 GOBLIN 👹  ╲
+               ╱    GOBLIN    ╲
               ╱   ╭─────╮   ╲
-             ╱    │ 👁️ 👁️ │    ╲
-            ╱     │  👄  │     ╲
+             ╱    │ o o │    ╲
+            ╱     │  _  │     ╲
            ╱      ╰─────╯      ╲
           ╱        ╱│╲        ╲
          ╱        ╱ │ ╲        ╲
         ╱        ╱  │  ╲        ╲
             """,
             """
-                👹 GOBLIN 👹
+                  GOBLIN
                  ╭─────╮
-                │ 👁️ 👁️ │
-                │  👄  │
+                │ o o │
+                │  _  │
                  ╰─────╯
                   ╱│╲
                  ╱ │ ╲
@@ -171,20 +171,20 @@ class ASCIIArt:
         "skeleton": [
             """
                 ╭─────────╮
-               ╱  💀 SKELETON 💀  ╲
+               ╱   SKELETON   ╲
               ╱   ╭─────╮   ╲
-             ╱    │ 🔴 🔴 │    ╲
-            ╱     │  ⚫  │     ╲
+             ╱    │ o o │    ╲
+            ╱     │     │     ╲
            ╱      ╰─────╯      ╲
           ╱      ╱│╲│╱│╲      ╲
          ╱      ╱ │ ╲│╱ │      ╲
         ╱      ╱  │  ╲│  │      ╲
             """,
             """
-                💀 SKELETON 💀
+                 SKELETON
                  ╭─────╮
-                │ 🔴 🔴 │
-                │  ⚫  │
+                │ o o │
+                │     │
                  ╰─────╯
                   ╱│╲│╱│╲
                  ╱ │ ╲│╱ │
@@ -194,20 +194,20 @@ class ASCIIArt:
         "bandit": [
             """
                 ╭─────────╮
-               ╱  🦹 BANDIT 🦹  ╲
+               ╱    BANDIT    ╲
               ╱   ╭─────╮   ╲
-             ╱    │ 👁️ 👁️ │    ╲
-            ╱     │  👄  │     ╲
+             ╱    │ o o │    ╲
+            ╱     │  _  │     ╲
            ╱      ╰─────╯      ╲
           ╱        ╱│╲        ╲
          ╱        ╱ │ ╲        ╲
         ╱        ╱  │  ╲        ╲
             """,
             """
-                🦹 BANDIT 🦹
+                  BANDIT
                  ╭─────╮
-                │ 👁️ 👁️ │
-                │  👄  │
+                │ o o │
+                │  _  │
                  ╰─────╯
                   ╱│╲
                  ╱ │ ╲
@@ -462,14 +462,15 @@ class ASCIIArt:
             if art_list:
                 art = random.choice(art_list)
                 # Apply alignment to center the art
-                return cls.align_ascii_art(art, 60)
+                return cls.align_art(art, 60)
         return None
     
     @classmethod
     def get_enemy_art(cls, enemy_type: str) -> Optional[str]:
         """Get enemy art."""
         if enemy_type in cls.ENEMY_ART:
-            return random.choice(cls.ENEMY_ART[enemy_type])
+            art = random.choice(cls.ENEMY_ART[enemy_type])
+            return cls.align_art(art)
         return None
     
     @classmethod
@@ -586,20 +587,11 @@ class ASCIIArt:
         return f"[{bar}] {current}/{maximum}"
     
     @classmethod
-    def align_ascii_art(cls, art: str, width: int = 60) -> str:
-        """Align ASCII art to center within specified width."""
-        lines = art.strip().split('\n')
-        max_line_length = max(len(line) for line in lines if line.strip())
-        padding = (width - max_line_length) // 2
-        
-        aligned_lines = []
-        for line in lines:
-            if line.strip():
-                aligned_lines.append(" " * padding + line)
-            else:
-                aligned_lines.append(line)
-        
-        return '\n'.join(aligned_lines)
+    def align_art(cls, art: str, width: int = 60) -> str:
+        lines = art.split('\n')
+        max_len = max(len(line) for line in lines)
+        padding = (width - max_len) // 2
+        return '\n'.join(' ' * padding + line for line in lines)
     
     @classmethod
     def create_centered_box(cls, title: str, content: str, width: int = 60) -> str:

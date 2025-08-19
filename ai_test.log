@@ -82,3 +82,32 @@ AttributeError: 'Player' object has no attribute 'max_inventory'
 2025-08-18 20:14:01,181 - game.ai_player - INFO - AI Player initialized with strategy: explorer
 2025-08-18 20:14:01,181 - game.ai_player - INFO - AI Player starting game session
 2025-08-18 20:14:31,316 - game.ai_player - INFO - AI Player log saved to ai_log_explorer_20250818_201431.txt
+2025-08-18 20:19:40,858 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:19:40,859 - game.engine - INFO - Game engine initialized
+2025-08-18 20:19:40,859 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-18 20:19:40,859 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:20:10,977 - game.ai_player - INFO - AI Player log saved to ai_log_explorer_20250818_202010.txt
+2025-08-18 20:22:11,949 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:22:11,949 - game.engine - INFO - Game engine initialized
+2025-08-18 20:22:11,949 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-18 20:22:11,949 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:22:11,949 - game.ai_player - ERROR - Error executing command 'east': type object 'ASCIIArt' has no attribute 'align_ascii_art'
+2025-08-18 20:22:12,955 - game.ai_player - ERROR - Error executing command 'north': type object 'ASCIIArt' has no attribute 'align_ascii_art'
+2025-08-18 20:22:14,964 - game.ai_player - ERROR - Error executing command 'north': type object 'ASCIIArt' has no attribute 'align_ascii_art'
+2025-08-18 20:22:16,974 - game.ai_player - ERROR - Error executing command 'north': type object 'ASCIIArt' has no attribute 'align_ascii_art'
+2025-08-18 20:22:22,001 - game.ai_player - ERROR - Error executing command 'up': type object 'ASCIIArt' has no attribute 'align_ascii_art'
+2025-08-18 20:23:17,873 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:23:17,873 - game.engine - INFO - Game engine initialized
+2025-08-18 20:23:17,873 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-18 20:23:17,873 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:23:47,982 - game.ai_player - INFO - AI Player log saved to ai_log_explorer_20250818_202347.txt
+2025-08-18 20:24:33,087 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:24:33,088 - game.engine - INFO - Game engine initialized
+2025-08-18 20:24:33,088 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-18 20:24:33,088 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:25:03,254 - game.ai_player - INFO - AI Player log saved to ai_log_explorer_20250818_202503.txt
+2025-08-18 20:26:04,829 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:26:04,830 - game.engine - INFO - Game engine initialized
+2025-08-18 20:26:04,830 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-18 20:26:04,830 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:26:34,952 - game.ai_player - INFO - AI Player log saved to ai_log_explorer_20250818_202634.txt

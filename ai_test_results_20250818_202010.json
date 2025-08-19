@@ -1,0 +1,47 @@
+{
+  "strategy": "explorer",
+  "actions_taken": 30,
+  "session_duration": 30.11,
+  "actions_per_second": 1.0,
+  "successful_commands": 30,
+  "failed_commands": 0,
+  "success_rate": 100.0,
+  "rooms_visited": 9,
+  "items_discovered": 19,
+  "npcs_encountered": 3,
+  "enemies_encountered": 3,
+  "final_level": 1,
+  "final_health": 100,
+  "final_gold": 0,
+  "inventory_size": 10,
+  "quests_active": 0,
+  "quests_completed": 0,
+  "recipes_known": 0,
+  "game_completed": false,
+  "player_alive": true,
+  "most_common_successful_commands": [
+    [
+      "talk guard",
+      8
+    ],
+    [
+      "north",
+      3
+    ],
+    [
+      "west",
+      3
+    ],
+    [
+      "east",
+      2
+    ],
+    [
+      "south",
+      2
+    ]
+  ],
+  "most_common_failed_commands": [],
+  "log_file": "ai_log_explorer_20250818_202010.txt",
+  "timestamp": "20250818_202010"
+}
