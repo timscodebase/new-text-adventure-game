@@ -1,0 +1,27 @@
+---
+description: Python Project Rules
+globs:
+alwaysApply: false
+---
+
+- Python Version: Use Python 3.11 or newer.
+- Modularity: Structure code into logical modules and packages. Avoid monolithic scripts.
+- Docstrings: Write clear, Google-style docstrings for all public modules, classes, and functions.
+- Error Handling: Implement robust error handling using specific exceptions. Avoid broad except Exception: clauses where possible.
+- Logging: Use the built-in logging module for application logging instead of print() statements.
+- Readability: Follow PEP 8 guidelines. Prioritize clear, readable code over overly clever or complex one-liners. Use f-strings for string formatting.
+- type Hints: Use type hints for all function signatures and variables. Utilize the typing module extensively.
+- Data Classes: Use dataclasses for simple data structures and Pydantic for complex data validation, especially for API models and settings management.
+- Strict Typing: Assume a strict type-checking environment (like mypy --strict).
+- Asyncio: Use the asyncio library for all asynchronous operations.
+- Async Libraries: When performing I/O operations (HTTP requests, database calls), prefer modern async libraries like httpx over requests and asyncpg over psycopg2.
+- Dependencies & Project Management
+- Dependency Management: Use pyproject.toml for project metadata and dependency management. Prefer Poetry or PDM over pip and requirements.txt.
+- Environment Variables: Use a dedicated library like pydantic-settings to manage environment variables and application configuration, rather than accessing os.environ directly throughout the code.
+- Tooling: Use Ruff for both linting and code formatting. It replaces the need for separate tools like Black, isort, and Flake8. Configure it in pyproject.toml.
+- Imports: Keep imports organized and clean, following standard conventions.
+- Framework: Use pytest as the exclusive testing framework.
+- Test Structure: Organize tests in a separate tests/ directory that mirrors the structure of your source code.
+- Mocking: Use the built-in unittest.mock library for mocking objects and functions.
+- Frameworks: For web APIs, prefer modern ASGI frameworks like FastAPI or Litestar. Avoid older WSGI frameworks like Flask or Django unless specifically requested.
+- API Specification: When creating APIs, adhere to the OpenAPI specification. FastAPI handles this automatically.
