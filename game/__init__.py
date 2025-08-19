@@ -17,6 +17,7 @@ from .crafting import CraftingSystem
 from .quests import QuestSystem
 from .save_system import SaveSystem
 from .ascii_art import ASCIIArt
+from .ai_player import AIPlayer, AIStrategy
 
 __all__ = [
     "GameEngine",
@@ -44,5 +45,7 @@ __all__ = [
     "CraftingSystem",
     "QuestSystem",
     "SaveSystem",
-    "ASCIIArt"
+    "ASCIIArt",
+    "AIPlayer",
+    "AIStrategy"
 ]

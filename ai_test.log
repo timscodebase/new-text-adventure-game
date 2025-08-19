@@ -1,0 +1,74 @@
+2025-08-18 20:05:56,182 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:05:56,182 - game.engine - INFO - Game engine initialized
+2025-08-18 20:05:56,183 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-18 20:05:56,183 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:05:56,912 - root - ERROR - Testing failed: 'Player' object has no attribute 'max_inventory'
+Traceback (most recent call last):
+  File "/Users/tithos/Dev/Python/new-text-adventure-game/ai_test_runner.py", line 215, in main
+    results = run_single_test(strategy, args.max_actions, args.delay, not args.quiet)
+  File "/Users/tithos/Dev/Python/new-text-adventure-game/ai_test_runner.py", line 41, in run_single_test
+    stats = ai_player.play_game(engine, delay=delay, verbose=verbose)
+  File "/Users/tithos/Dev/Python/new-text-adventure-game/game/ai_player.py", line 64, in play_game
+    command = self._choose_action(engine.state)
+  File "/Users/tithos/Dev/Python/new-text-adventure-game/game/ai_player.py", line 117, in _choose_action
+    return self._choose_explorer_action(state, current_room)
+  File "/Users/tithos/Dev/Python/new-text-adventure-game/game/ai_player.py", line 143, in _choose_explorer_action
+    if room_items and len(state.player.inventory) < state.player.max_inventory:
+  File "/Users/tithos/Dev/Python/new-text-adventure-game/.env/lib/python3.10/site-packages/pydantic/main.py", line 991, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Player' object has no attribute 'max_inventory'
+2025-08-18 20:06:22,916 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:06:22,916 - game.engine - INFO - Game engine initialized
+2025-08-18 20:06:22,916 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-18 20:06:22,916 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:06:25,982 - game.ai_player - INFO - AI Player log saved to ai_log_explorer_20250818_200625.txt
+2025-08-18 20:06:30,359 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:06:30,359 - game.engine - INFO - Game engine initialized
+2025-08-18 20:06:30,359 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-18 20:06:30,359 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:06:31,704 - game.ai_player - INFO - AI Player log saved to ai_log_explorer_20250818_200631.txt
+2025-08-18 20:06:31,704 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:06:31,705 - game.engine - INFO - Game engine initialized
+2025-08-18 20:06:31,705 - game.ai_player - INFO - AI Player initialized with strategy: combatant
+2025-08-18 20:06:31,705 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:06:33,059 - game.ai_player - INFO - AI Player log saved to ai_log_combatant_20250818_200633.txt
+2025-08-18 20:06:33,060 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:06:33,060 - game.engine - INFO - Game engine initialized
+2025-08-18 20:06:33,060 - game.ai_player - INFO - AI Player initialized with strategy: collector
+2025-08-18 20:06:33,060 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:06:34,420 - game.ai_player - INFO - AI Player log saved to ai_log_collector_20250818_200634.txt
+2025-08-18 20:06:34,422 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:06:34,423 - game.engine - INFO - Game engine initialized
+2025-08-18 20:06:34,423 - game.ai_player - INFO - AI Player initialized with strategy: quester
+2025-08-18 20:06:34,423 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:06:35,762 - game.ai_player - INFO - AI Player log saved to ai_log_quester_20250818_200635.txt
+2025-08-18 20:06:35,763 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:06:35,764 - game.engine - INFO - Game engine initialized
+2025-08-18 20:06:35,764 - game.ai_player - INFO - AI Player initialized with strategy: random
+2025-08-18 20:06:35,764 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:06:37,120 - game.ai_player - INFO - AI Player log saved to ai_log_random_20250818_200637.txt
+2025-08-18 20:06:41,878 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:06:41,878 - game.engine - INFO - Game engine initialized
+2025-08-18 20:06:41,878 - game.ai_player - INFO - AI Player initialized with strategy: random
+2025-08-18 20:06:41,878 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:06:42,250 - game.ai_player - INFO - AI Player log saved to ai_log_random_20250818_200642.txt
+2025-08-18 20:06:42,251 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:06:42,252 - game.engine - INFO - Game engine initialized
+2025-08-18 20:06:42,252 - game.ai_player - INFO - AI Player initialized with strategy: random
+2025-08-18 20:06:42,252 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:06:42,614 - game.ai_player - INFO - AI Player log saved to ai_log_random_20250818_200642.txt
+2025-08-18 20:06:42,614 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:06:42,615 - game.engine - INFO - Game engine initialized
+2025-08-18 20:06:42,615 - game.ai_player - INFO - AI Player initialized with strategy: random
+2025-08-18 20:06:42,615 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:06:42,998 - game.ai_player - INFO - AI Player log saved to ai_log_random_20250818_200642.txt
+2025-08-18 20:06:42,998 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:06:42,998 - game.engine - INFO - Game engine initialized
+2025-08-18 20:06:42,998 - game.ai_player - INFO - AI Player initialized with strategy: random
+2025-08-18 20:06:42,998 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:06:43,365 - game.ai_player - INFO - AI Player log saved to ai_log_random_20250818_200643.txt
+2025-08-18 20:06:43,366 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:06:43,366 - game.engine - INFO - Game engine initialized
+2025-08-18 20:06:43,366 - game.ai_player - INFO - AI Player initialized with strategy: random
+2025-08-18 20:06:43,366 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:06:43,738 - game.ai_player - INFO - AI Player log saved to ai_log_random_20250818_200643.txt

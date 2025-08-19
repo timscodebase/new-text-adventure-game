@@ -1,0 +1,109 @@
+=== AI Player Session Started (Strategy: collector) ===
+Action 1: take torch
+Result: ✅ You take the torch....
+Action 2: take old map
+Result: ✅ You take the old map....
+Action 3: take herb
+Result: ✅ You take the herb....
+Action 4: east
+Result: 
+🚶 Moving east...
+    🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒
+                       🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒🛒...
+  -> Moved to: Market Square
+Action 5: take thread
+Result: ✅ You take the thread....
+Action 6: take gold coin
+Result: ✅ You take the gold coin....
+Action 7: take cloth
+Result: ✅ You take the cloth....
+Action 8: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 9: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 10: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 11: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 12: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 13: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 14: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 15: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 16: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 17: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 18: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 19: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 20: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 21: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 22: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 23: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 24: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
+Action 25: shop
+Result: 🛒 merchant's Shop:
+  💰 torch: 15 gold
+  💰 health potion: 30 gold
+  💰 old map: 20 gold...
