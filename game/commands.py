@@ -18,13 +18,14 @@ logger = logging.getLogger(__name__)
 class CommandParser:
     """Parses and executes player commands."""
     
-    def __init__(self, game_state: GameState, command_history=None) -> None:
+    def __init__(self, game_state: GameState, command_history=None, console=None) -> None:
         """Initialize the command parser with the game state."""
         self.state = game_state
         self.combat_system = CombatSystem(game_state)
         self.crafting_system = CraftingSystem(game_state)
         self.quest_system = QuestSystem(game_state)
         self.command_history = command_history
+        self.console = console
         self._setup_commands()
     
     def _setup_commands(self) -> None:
@@ -247,9 +248,24 @@ class CommandParser:
     def _cmd_inventory(self, args: List[str]) -> str:
         """Show player inventory."""
         if not self.state.player.inventory:
+            if self.console:
+                self.console.print("📦 You are carrying nothing.", style="info")
+                return ""
             return "📦 You are carrying nothing."
-        
-        items = [self.state.items[item_id].name for item_id in self.state.player.inventory]
+        items = []
+        equipped_ids = set()
+        for slot, item_id in self.state.player.equipment.model_dump().items():
+            if item_id:
+                equipped_ids.add(item_id)
+        for item_id in self.state.player.inventory:
+            item = self.state.items[item_id]
+            if item_id in equipped_ids:
+                items.append(f"[info]{item.name}[/info] (equipped)")
+            else:
+                items.append(f"[item]{item.name}[/item]")
+        if self.console:
+            self.console.print(f"📦 You are carrying: {', '.join(items)}")
+            return ""
         return f"📦 You are carrying: {', '.join(items)}"
     
     def _cmd_use(self, args: List[str]) -> str:
@@ -296,11 +312,24 @@ class CommandParser:
     def _cmd_status(self, args: List[str]) -> str:
         """Show player status."""
         player = self.state.player
-        return (f"❤️  Health: {player.health}/{player.max_health} | "
-                f"⭐ Level: {player.level} | "
-                f"📊 Experience: {player.experience}/{player.experience_to_next} | "
-                f"💰 Gold: {player.gold} | "
-                f"🏆 Score: {player.score} | 👣 Moves: {player.moves}")
+        health_str = f"[error]{player.health}[/error]" if player.health < player.max_health * 0.3 else f"[info]{player.health}[/info]"
+        gold_str = f"[info]{player.gold}[/info]" if player.gold > 0 else f"[error]{player.gold}[/error]"
+        exp_str = f"[info]{player.experience}[/info]"
+        status = (
+            f"❤️  Health: {health_str}/{player.max_health} | "
+            f"⭐ Level: [info]{player.level}[/info] | "
+            f"📊 Experience: {exp_str}/[info]{player.experience_to_next}[/info] | "
+            f"💰 Gold: {gold_str} | "
+            f"🏆 Score: [info]{player.score}[/info] | 👣 Moves: [info]{player.moves}[/info]"
+        )
+        if self.console:
+            self.console.print(status)
+            if player.status_effects:
+                self.console.print("⚠️  Status Effects:", style="error")
+                for effect, duration in player.status_effects.items():
+                    self.console.print(f"  [error]{effect}[/error]: {duration} turns")
+            return ""
+        return status
     
     def _cmd_score(self, args: List[str]) -> str:
         """Show player score."""
@@ -325,16 +354,37 @@ class CommandParser:
         result = self.combat_system.attack(target_name)
         
         # Add combat art if it's an attack
-        if "attack" in result.lower():
+        if self.console:
+            if "miss" in result.lower() or "fail" in result.lower():
+                self.console.print(result, style="error")
+            elif "critical" in result.lower() or "level up" in result.lower():
+                self.console.print(result, style="info")
+            elif "heal" in result.lower():
+                self.console.print(result, style="info")
+            elif "defeat" in result.lower() or "killed" in result.lower():
+                self.console.print(result, style="enemy")
+            else:
+                self.console.print(result, style="enemy")
+            combat_art = ASCIIArt.get_combat_art("attack")
+            if combat_art:
+                self.console.print(combat_art, style="enemy")
+            return ""
+        else:
             combat_art = ASCIIArt.get_combat_art("attack")
             if combat_art:
                 return f"{combat_art}\n{result}"
-        
-        return result
+            return result
     
     def _cmd_flee(self, args: List[str]) -> str:
         """Flee from combat."""
-        return self.combat_system.flee()
+        result = self.combat_system.flee()
+        if self.console:
+            if "success" in result.lower():
+                self.console.print(result, style="info")
+            else:
+                self.console.print(result, style="error")
+            return ""
+        return result
     
     def _cmd_combat_status(self, args: List[str]) -> str:
         """Show combat status."""
@@ -406,14 +456,18 @@ class CommandParser:
         """Show equipped items."""
         equipment = self.state.player.equipment
         equipped_items = []
-        
         for slot, item_id in equipment.model_dump().items():
             if item_id:
                 item = self.state.items[item_id]
-                equipped_items.append(f"🛡️ {slot.title()}: {item.name}")
+                style = "info" if slot in ("weapon", "armor") else "item"
+                equipped_items.append(f"🛡️ [bold]{slot.title()}[/bold]: [{style}]{item.name}[/{style}]")
             else:
-                equipped_items.append(f"🛡️ {slot.title()}: Nothing")
-        
+                equipped_items.append(f"🛡️ [bold]{slot.title()}[/bold]: [error]Nothing[/error]")
+        if self.console:
+            self.console.print("Equipped Items:")
+            for line in equipped_items:
+                self.console.print(line)
+            return ""
         return "Equipped Items:\n" + "\n".join(equipped_items)
     
     # Crafting commands
@@ -476,6 +530,12 @@ class CommandParser:
         quest_name = " ".join(args)
         result = self.quest_system.accept_quest(quest_name)
         
+        if self.console:
+            if "accept" in result.lower():
+                self.console.print(f"📜 {result}", style="info")
+            else:
+                self.console.print(f"❌ {result}", style="error")
+            return ""
         if "accept" in result.lower():
             return f"📜 {result}"
         else:
@@ -483,7 +543,14 @@ class CommandParser:
     
     def _cmd_quest_progress(self, args: List[str]) -> str:
         """Check quest progress."""
-        return self.quest_system.check_quest_progress()
+        result = self.quest_system.check_quest_progress()
+        if self.console:
+            if "complete" in result.lower():
+                self.console.print(result, style="info")
+            else:
+                self.console.print(result)
+            return ""
+        return result
     
     # System commands
     def _cmd_stats(self, args: List[str]) -> str:

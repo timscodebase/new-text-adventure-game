@@ -4,6 +4,7 @@
 import logging
 import sys
 from pathlib import Path
+import argparse
 
 # Add the project root to the Python path
 project_root = Path(__file__).parent
@@ -26,12 +27,16 @@ def setup_logging() -> None:
 
 def main() -> None:
     """Main function to start the game."""
+    parser = argparse.ArgumentParser(description="Text Adventure Game")
+    parser.add_argument('--no-color', action='store_true', help='Disable colored output')
+    args = parser.parse_args()
+
     setup_logging()
     logger = logging.getLogger(__name__)
     
     try:
         logger.info("Starting text adventure game")
-        engine = GameEngine()
+        engine = GameEngine(no_color=args.no_color)
         engine.start_game()
         logger.info("Game ended")
         

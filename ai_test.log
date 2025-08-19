@@ -111,3 +111,13 @@ AttributeError: 'Player' object has no attribute 'max_inventory'
 2025-08-18 20:26:04,830 - game.ai_player - INFO - AI Player initialized with strategy: explorer
 2025-08-18 20:26:04,830 - game.ai_player - INFO - AI Player starting game session
 2025-08-18 20:26:34,952 - game.ai_player - INFO - AI Player log saved to ai_log_explorer_20250818_202634.txt
+2025-08-18 20:30:35,976 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:30:35,978 - game.engine - INFO - Game engine initialized
+2025-08-18 20:30:35,978 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-18 20:30:35,978 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:31:06,104 - game.ai_player - INFO - AI Player log saved to ai_log_explorer_20250818_203106.txt
+2025-08-18 20:40:56,573 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:40:56,574 - game.engine - INFO - Game engine initialized
+2025-08-18 20:40:56,574 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-18 20:40:56,574 - game.ai_player - INFO - AI Player starting game session
+2025-08-18 20:41:26,687 - game.ai_player - INFO - AI Player log saved to ai_log_explorer_20250818_204126.txt

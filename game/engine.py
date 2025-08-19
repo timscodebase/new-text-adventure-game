@@ -12,7 +12,8 @@ from game.commands import CommandParser
 from game.world_builder import WorldBuilder
 from game.save_system import SaveSystem
 from game.ascii_art import ASCIIArt
-
+from rich.console import Console
+from rich.theme import Theme
 
 logger = logging.getLogger(__name__)
 
@@ -97,13 +98,26 @@ class CommandHistory:
 class GameEngine:
     """Main game engine that manages the game state and logic."""
     
-    def __init__(self) -> None:
+    def __init__(self, no_color: bool = False) -> None:
         """Initialize the game engine."""
         self.state: GameState
         self.command_parser: CommandParser
         self.world_builder: WorldBuilder
         self.save_system: SaveSystem
         self.command_history: CommandHistory
+        self.no_color = no_color
+        self.console = Console(theme=Theme({
+            "banner": "bold magenta",
+            "prompt": "bold cyan",
+            "info": "bold green",
+            "error": "bold red",
+            "room": "bold yellow",
+            "npc": "bold blue",
+            "enemy": "bold red",
+            "item": "bold white",
+        }),
+        color_system=None if no_color else "auto",
+        force_terminal=not no_color)
         self._initialize_game()
     
     def _initialize_game(self) -> None:
@@ -111,18 +125,18 @@ class GameEngine:
         self.world_builder = WorldBuilder()
         self.state = self.world_builder.create_world()
         self.command_history = CommandHistory()
-        self.command_parser = CommandParser(self.state, self.command_history)
+        self.command_parser = CommandParser(self.state, self.command_history, console=self.console)
         self.save_system = SaveSystem()
         logger.info("Game engine initialized")
     
     def start_game(self) -> None:
         """Start the game and display the initial room."""
         # Display fancy title banner
-        print(ASCIIArt.get_title_banner())
-        print(ASCIIArt.center_text("Type 'help' for commands, 'quit' to exit"))
-        print(ASCIIArt.center_text("Use ↑/↓ arrows to browse command history"))
-        print(ASCIIArt.create_separator("═", 60))
-        print()
+        self.console.print(ASCIIArt.get_title_banner(), style="banner")
+        self.console.print(ASCIIArt.center_text("Type 'help' for commands, 'quit' to exit"), style="info")
+        self.console.print(ASCIIArt.center_text("Use ↑/↓ arrows to browse command history"), style="info")
+        self.console.print(ASCIIArt.create_separator("═", 60), style="banner")
+        self.console.print()
         
         # Give player some starting recipes
         self.state.player.known_recipes.add("torch")
@@ -135,7 +149,8 @@ class GameEngine:
         """Main game loop."""
         while not self.state.is_game_over and self.state.player.is_alive:
             try:
-                command = input("\n> ").strip()
+                self.console.print("\n> ", style="prompt", end="")
+                command = input().strip()
                 if not command:
                     continue
                 
@@ -145,7 +160,7 @@ class GameEngine:
                 command_lower = command.lower()
                 
                 if command_lower in ['quit', 'exit', 'q']:
-                    print("Thanks for playing!")
+                    self.console.print("Thanks for playing!", style="info")
                     break
                 
                 self._process_command(command_lower)
@@ -154,11 +169,11 @@ class GameEngine:
                 self._check_quest_progress()
                 
             except KeyboardInterrupt:
-                print("\n\nGame interrupted. Thanks for playing!")
+                self.console.print("\n\nGame interrupted. Thanks for playing!", style="info")
                 break
             except Exception as e:
                 logger.error(f"Error in game loop: {e}")
-                print("Something went wrong. Please try again.")
+                self.console.print("Something went wrong. Please try again.", style="error")
         
         # Save command history when game ends
         self.command_history.save_history()
@@ -168,72 +183,66 @@ class GameEngine:
         try:
             result = self.command_parser.parse_and_execute(command)
             if result:
-                print(result)
+                self.console.print(result)
             
             # Check for victory conditions
             self._check_victory_conditions()
             
         except Exception as e:
             logger.error(f"Error processing command '{command}': {e}")
-            print("I don't understand that command.")
+            self.console.print("I don't understand that command.", style="error")
     
     def _display_room(self) -> None:
         """Display the current room description with ASCII art."""
         current_room = self.state.rooms[self.state.player.current_room]
-        
         # Get room decoration art
         room_art = ASCIIArt.get_room_decoration(current_room.id)
         if room_art:
-            print(room_art)
+            self.console.print(room_art, style="room")
         else:
             # Default room header
-            print(ASCIIArt.create_box("", current_room.name.upper(), 60))
-        
-        print()
-        
+            self.console.print(ASCIIArt.create_box("", f"[room]{current_room.name.upper()}[/room]", 60), style="room")
+        self.console.print()
         # Room description
         if current_room.is_visited:
-            print(current_room.description)
+            self.console.print(current_room.description)
         else:
-            print(current_room.long_description or current_room.description)
+            self.console.print(current_room.long_description or current_room.description)
             current_room.is_visited = True
-        
-        print()
-        
+        self.console.print()
         # Display exits
         if current_room.exits:
             exit_dirs = [exit_obj.direction.value for exit_obj in current_room.exits.values() if exit_obj.is_open]
             if exit_dirs:
-                print(f"🚪 Exits: {', '.join(exit_dirs)}")
-        
+                self.console.print(f"🚪 Exits: [info]{', '.join(exit_dirs)}[/info]")
         # Display items in room
         room_items = [self.state.items[item_id] for item_id in current_room.items 
                      if item_id in self.state.items and self.state.items[item_id].is_visible]
         if room_items:
-            print(f"📦 You see: {', '.join(item.name for item in room_items)}")
-        
+            item_str = ', '.join(f"[item]{item.name}[/item]" for item in room_items)
+            self.console.print(f"📦 You see: {item_str}")
         # Display NPCs in room
         room_npcs = [self.state.npcs[npc_id] for npc_id in current_room.npcs 
                     if npc_id in self.state.npcs and self.state.npcs[npc_id].is_alive]
         if room_npcs:
-            print(f"👥 Present: {', '.join(npc.name for npc in room_npcs)}")
-        
+            npc_str = ', '.join(f"[npc]{npc.name}[/npc]" for npc in room_npcs)
+            self.console.print(f"👥 Present: {npc_str}")
         # Display enemies in room
         room_enemies = [self.state.enemies[enemy_id] for enemy_id in current_room.enemies 
                        if enemy_id in self.state.enemies and self.state.enemies[enemy_id].is_alive]
         if room_enemies:
-            print(f"👹 Enemies: {', '.join(enemy.name for enemy in room_enemies)}")
-        
-        print()
-        print(ASCIIArt.create_separator("─", 60))
+            enemy_str = ', '.join(f"[enemy]{enemy.name}[/enemy]" for enemy in room_enemies)
+            self.console.print(f"👹 Enemies: {enemy_str}")
+        self.console.print()
+        self.console.print(ASCIIArt.create_separator("─", 60), style="room")
     
     def _check_victory_conditions(self) -> None:
         """Check if victory conditions have been met."""
         # Example victory condition: player has a specific item
         if "treasure_chest" in self.state.player.inventory:
-            print()
-            print(ASCIIArt.get_victory_banner())
-            print()
+            self.console.print()
+            self.console.print(ASCIIArt.get_victory_banner(), style="room")
+            self.console.print()
             self.state.is_game_over = True
     
     def _check_quest_progress(self) -> None:
