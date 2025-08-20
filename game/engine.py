@@ -11,7 +11,7 @@ from game.models import (
 from game.commands import CommandParser
 from game.world_builder import WorldBuilder
 from game.save_system import SaveSystem
-from game.ascii_art import ASCIIArt
+from game.visuals import Visuals
 from rich.console import Console
 from rich.theme import Theme
 
@@ -132,10 +132,10 @@ class GameEngine:
     def start_game(self) -> None:
         """Start the game and display the initial room."""
         # Display fancy title banner
-        self.console.print(ASCIIArt.get_title_banner(), style="banner")
-        self.console.print(ASCIIArt.center_text("Type 'help' for commands, 'quit' to exit"), style="info")
-        self.console.print(ASCIIArt.center_text("Use ↑/↓ arrows to browse command history"), style="info")
-        self.console.print(ASCIIArt.create_separator("═", 60), style="banner")
+        self.console.print(Visuals.get_title_banner(), style="banner")
+        self.console.print(Visuals.center_text("Type 'help' for commands, 'quit' to exit"), style="info")
+        self.console.print(Visuals.center_text("Use ↑/↓ arrows to browse command history"), style="info")
+        self.console.print(Visuals.create_separator("═", 60), style="banner")
         self.console.print()
         
         # Give player some starting recipes
@@ -196,12 +196,12 @@ class GameEngine:
         """Display the current room description with ASCII art."""
         current_room = self.state.rooms[self.state.player.current_room]
         # Get room decoration art
-        room_art = ASCIIArt.get_room_decoration(current_room.id)
+        room_art = Visuals.get_room_decoration(current_room.id)
         if room_art:
             self.console.print(room_art, style="room")
         else:
             # Default room header
-            self.console.print(ASCIIArt.create_box("", f"[room]{current_room.name.upper()}[/room]", 60), style="room")
+            self.console.print(Visuals.create_box("", f"[room]{current_room.name.upper()}[/room]", 60), style="room")
         self.console.print()
         # Room description
         if current_room.is_visited:
@@ -214,34 +214,34 @@ class GameEngine:
         if current_room.exits:
             exit_dirs = [exit_obj.direction.value for exit_obj in current_room.exits.values() if exit_obj.is_open]
             if exit_dirs:
-                self.console.print(f"🚪 Exits: [info]{', '.join(exit_dirs)}[/info]")
+                self.console.print(f"Exits: [info]{', '.join(exit_dirs)}[/info]")
         # Display items in room
         room_items = [self.state.items[item_id] for item_id in current_room.items 
                      if item_id in self.state.items and self.state.items[item_id].is_visible]
         if room_items:
             item_str = ', '.join(f"[item]{item.name}[/item]" for item in room_items)
-            self.console.print(f"📦 You see: {item_str}")
+            self.console.print(f"You see: {item_str}")
         # Display NPCs in room
         room_npcs = [self.state.npcs[npc_id] for npc_id in current_room.npcs 
                     if npc_id in self.state.npcs and self.state.npcs[npc_id].is_alive]
         if room_npcs:
             npc_str = ', '.join(f"[npc]{npc.name}[/npc]" for npc in room_npcs)
-            self.console.print(f"👥 Present: {npc_str}")
+            self.console.print(f"Present: {npc_str}")
         # Display enemies in room
         room_enemies = [self.state.enemies[enemy_id] for enemy_id in current_room.enemies 
                        if enemy_id in self.state.enemies and self.state.enemies[enemy_id].is_alive]
         if room_enemies:
             enemy_str = ', '.join(f"[enemy]{enemy.name}[/enemy]" for enemy in room_enemies)
-            self.console.print(f"👹 Enemies: {enemy_str}")
+            self.console.print(f"Enemies: {enemy_str}")
         self.console.print()
-        self.console.print(ASCIIArt.create_separator("─", 60), style="room")
+        self.console.print(Visuals.create_separator("─", 60), style="room")
     
     def _check_victory_conditions(self) -> None:
         """Check if victory conditions have been met."""
         # Example victory condition: player has a specific item
         if "treasure_chest" in self.state.player.inventory:
             self.console.print()
-            self.console.print(ASCIIArt.get_victory_banner(), style="room")
+            self.console.print(Visuals.get_victory_banner(), style="room")
             self.console.print()
             self.state.is_game_over = True
     
@@ -257,16 +257,16 @@ class GameEngine:
         
         # Create a fancy status box
         status_lines = [
-            f"👤 {player.name} (Level {player.level})",
-            f"❤️  Health: {ASCIIArt.create_health_bar(player.health, player.max_health)}",
-            f"⭐ Experience: {ASCIIArt.create_experience_bar(player.experience, player.experience_to_next)}",
-            f"💰 Gold: {player.gold}",
-            f"🎒 Items: {len(player.inventory)}/{player.max_inventory}",
-            f"🚶 Moves: {player.moves}",
-            f"📍 Location: {self.state.rooms[player.current_room].name}"
+            f"Name: {player.name} (Level {player.level})",
+            f"Health: {Visuals.create_health_bar(player.health, player.max_health)}",
+            f"Experience: {Visuals.create_experience_bar(player.experience, player.experience_to_next)}",
+            f"Gold: {player.gold}",
+            f"Items: {len(player.inventory)}/{player.max_inventory}",
+            f"Moves: {player.moves}",
+            f"Location: {self.state.rooms[player.current_room].name}"
         ]
         
-        return ASCIIArt.create_box("Player Status", "\n".join(status_lines), 50)
+        return Visuals.create_box("Player Status", "\n".join(status_lines), 50)
     
     # Save/Load methods that delegate to SaveSystem
     def save_game(self, save_name: str) -> bool:

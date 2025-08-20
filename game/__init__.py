@@ -16,19 +16,18 @@ from .combat import CombatSystem
 from .crafting import CraftingSystem
 from .quests import QuestSystem
 from .save_system import SaveSystem
-from .ascii_art import ASCIIArt
 from .ai_player import AIPlayer, AIStrategy
 
 __all__ = [
     "GameEngine",
-    "GameState", 
-    "Player", 
-    "Room", 
-    "Item", 
-    "NPC", 
+    "GameState",
+    "Player",
+    "Room",
+    "Item",
+    "NPC",
     "Enemy",
-    "Direction", 
-    "Exit", 
+    "Direction",
+    "Exit",
     "ItemType",
     "Equipment",
     "Quest",
@@ -45,7 +44,6 @@ __all__ = [
     "CraftingSystem",
     "QuestSystem",
     "SaveSystem",
-    "ASCIIArt",
     "AIPlayer",
     "AIStrategy"
 ]

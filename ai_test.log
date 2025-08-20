@@ -121,3 +121,27 @@ AttributeError: 'Player' object has no attribute 'max_inventory'
 2025-08-18 20:40:56,574 - game.ai_player - INFO - AI Player initialized with strategy: explorer
 2025-08-18 20:40:56,574 - game.ai_player - INFO - AI Player starting game session
 2025-08-18 20:41:26,687 - game.ai_player - INFO - AI Player log saved to ai_log_explorer_20250818_204126.txt
+2025-08-18 20:42:00,657 - game.world_builder - INFO - Game world created successfully
+2025-08-18 20:42:00,657 - game.engine - INFO - Game engine initialized
+2025-08-18 20:42:00,657 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-18 20:42:00,657 - game.ai_player - INFO - AI Player starting game session
+2025-08-19 17:03:15,395 - game.world_builder - INFO - Game world created successfully
+2025-08-19 17:03:15,395 - game.engine - INFO - Game engine initialized
+2025-08-19 17:03:15,395 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-19 17:03:15,395 - game.ai_player - INFO - AI Player starting game session
+2025-08-19 17:03:22,415 - game.ai_player - ERROR - Error executing command 'talk merchant': local variable 'default_message' referenced before assignment
+2025-08-19 17:03:23,422 - game.ai_player - ERROR - Error executing command 'talk merchant': local variable 'default_message' referenced before assignment
+2025-08-19 17:03:24,427 - game.ai_player - ERROR - Error executing command 'talk merchant': local variable 'default_message' referenced before assignment
+2025-08-19 17:03:25,433 - game.ai_player - ERROR - Error executing command 'talk merchant': local variable 'default_message' referenced before assignment
+2025-08-19 17:03:26,437 - game.ai_player - ERROR - Error executing command 'talk merchant': local variable 'default_message' referenced before assignment
+2025-08-19 17:03:27,441 - game.ai_player - ERROR - Error executing command 'talk merchant': local variable 'default_message' referenced before assignment
+2025-08-19 17:03:28,447 - game.ai_player - ERROR - Error executing command 'talk merchant': local variable 'default_message' referenced before assignment
+2025-08-19 17:03:29,448 - game.ai_player - ERROR - Error executing command 'talk merchant': local variable 'default_message' referenced before assignment
+2025-08-19 17:03:30,454 - game.ai_player - ERROR - Error executing command 'talk merchant': local variable 'default_message' referenced before assignment
+2025-08-19 17:03:31,456 - game.ai_player - ERROR - Error executing command 'talk merchant': local variable 'default_message' referenced before assignment
+2025-08-19 17:03:32,462 - game.ai_player - ERROR - Error executing command 'talk merchant': local variable 'default_message' referenced before assignment
+2025-08-19 17:09:15,806 - game.world_builder - INFO - Game world created successfully
+2025-08-19 17:09:15,806 - game.engine - INFO - Game engine initialized
+2025-08-19 17:09:15,806 - game.ai_player - INFO - AI Player initialized with strategy: explorer
+2025-08-19 17:09:15,806 - game.ai_player - INFO - AI Player starting game session
+2025-08-19 17:09:45,964 - game.ai_player - INFO - AI Player log saved to ai_log_explorer_20250819_170945.txt
