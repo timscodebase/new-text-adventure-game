@@ -1,0 +1,636 @@
+<p><a id="ai_player"></a></p>
+<h1>ai_player</h1>
+<p>AI player for automated game testing.</p>
+<p><a id="ai_player.AIStrategy"></a></p>
+<h2>AIStrategy Objects</h2>
+<pre><code class="language-python">class AIStrategy(Enum)
+</code></pre>
+<p>Different AI playing strategies.</p>
+<p><a id="ai_player.AIStrategy.EXPLORER"></a></p>
+<h4>EXPLORER</h4>
+<p>Focus on exploring all areas</p>
+<p><a id="ai_player.AIStrategy.COMBATANT"></a></p>
+<h4>COMBATANT</h4>
+<p>Focus on combat and leveling</p>
+<p><a id="ai_player.AIStrategy.COLLECTOR"></a></p>
+<h4>COLLECTOR</h4>
+<p>Focus on collecting items and crafting</p>
+<p><a id="ai_player.AIStrategy.QUESTER"></a></p>
+<h4>QUESTER</h4>
+<p>Focus on completing quests</p>
+<p><a id="ai_player.AIStrategy.RANDOM"></a></p>
+<h4>RANDOM</h4>
+<p>Random actions for chaos testing</p>
+<p><a id="ai_player.AIPlayer"></a></p>
+<h2>AIPlayer Objects</h2>
+<pre><code class="language-python">class AIPlayer()
+</code></pre>
+<p>An AI player that can automatically play the game for testing.</p>
+<p><a id="ai_player.AIPlayer.__init__"></a></p>
+<h4>__init__</h4>
+<pre><code class="language-python">def __init__(strategy: AIStrategy = AIStrategy.EXPLORER,
+             max_actions: int = 100)
+</code></pre>
+<p>Initialize the AI player.</p>
+<p><a id="ai_player.AIPlayer.play_game"></a></p>
+<h4>play_game</h4>
+<pre><code class="language-python">def play_game(engine: GameEngine,
+              delay: float = 1.0,
+              verbose: bool = True) -&gt; Dict[str, any]
+</code></pre>
+<p>Play the game automatically and return statistics.</p>
+<p><a id="ai_player.AIPlayer.save_log"></a></p>
+<h4>save_log</h4>
+<pre><code class="language-python">def save_log(filename: str = &quot;ai_player_log.txt&quot;) -&gt; None
+</code></pre>
+<p>Save the game log to a file.</p>
+<p><a id="models"></a></p>
+<h1>models</h1>
+<p>Core data models for the text adventure game.</p>
+<p><a id="models.Direction"></a></p>
+<h2>Direction Objects</h2>
+<pre><code class="language-python">class Direction(str, Enum)
+</code></pre>
+<p>Valid movement directions.</p>
+<p><a id="models.ItemType"></a></p>
+<h2>ItemType Objects</h2>
+<pre><code class="language-python">class ItemType(str, Enum)
+</code></pre>
+<p>Types of items in the game.</p>
+<p><a id="models.WeatherType"></a></p>
+<h2>WeatherType Objects</h2>
+<pre><code class="language-python">class WeatherType(str, Enum)
+</code></pre>
+<p>Types of weather conditions.</p>
+<p><a id="models.TimeOfDay"></a></p>
+<h2>TimeOfDay Objects</h2>
+<pre><code class="language-python">class TimeOfDay(str, Enum)
+</code></pre>
+<p>Times of day.</p>
+<p><a id="models.EnemyType"></a></p>
+<h2>EnemyType Objects</h2>
+<pre><code class="language-python">class EnemyType(str, Enum)
+</code></pre>
+<p>Types of enemies.</p>
+<p><a id="models.QuestStatus"></a></p>
+<h2>QuestStatus Objects</h2>
+<pre><code class="language-python">class QuestStatus(str, Enum)
+</code></pre>
+<p>Quest status.</p>
+<p><a id="models.Item"></a></p>
+<h2>Item Objects</h2>
+<pre><code class="language-python">class Item(BaseModel)
+</code></pre>
+<p>Represents an item in the game world.</p>
+<p><a id="models.Item.required_items"></a></p>
+<h4>required_items</h4>
+<p>Items needed to use this</p>
+<p><a id="models.Item.durability"></a></p>
+<h4>durability</h4>
+<p>New: item durability</p>
+<p><a id="models.Item.damage"></a></p>
+<h4>damage</h4>
+<p>New: weapon damage</p>
+<p><a id="models.Item.armor_value"></a></p>
+<h4>armor_value</h4>
+<p>New: armor protection</p>
+<p><a id="models.Item.healing_value"></a></p>
+<h4>healing_value</h4>
+<p>New: healing amount</p>
+<p><a id="models.Item.crafting_recipe"></a></p>
+<h4>crafting_recipe</h4>
+<p>New: crafting requirements</p>
+<p><a id="models.Item.magic_effects"></a></p>
+<h4>magic_effects</h4>
+<p>New: magical properties</p>
+<p><a id="models.Equipment"></a></p>
+<h2>Equipment Objects</h2>
+<pre><code class="language-python">class Equipment(BaseModel)
+</code></pre>
+<p>Represents equipped items.</p>
+<p><a id="models.Enemy"></a></p>
+<h2>Enemy Objects</h2>
+<pre><code class="language-python">class Enemy(BaseModel)
+</code></pre>
+<p>Represents an enemy in the game.</p>
+<p><a id="models.Enemy.aggression_level"></a></p>
+<h4>aggression_level</h4>
+<p>1-10, how likely to attack</p>
+<p><a id="models.Quest"></a></p>
+<h2>Quest Objects</h2>
+<pre><code class="language-python">class Quest(BaseModel)
+</code></pre>
+<p>Represents a quest in the game.</p>
+<p><a id="models.Quest.quest_giver"></a></p>
+<h4>quest_giver</h4>
+<p>NPC ID</p>
+<p><a id="models.Quest.requirements"></a></p>
+<h4>requirements</h4>
+<p>item_id: count</p>
+<p><a id="models.Quest.rewards"></a></p>
+<h4>rewards</h4>
+<p>item_id: count</p>
+<p><a id="models.Quest.time_limit"></a></p>
+<h4>time_limit</h4>
+<p>in game hours</p>
+<p><a id="models.Exit"></a></p>
+<h2>Exit Objects</h2>
+<pre><code class="language-python">class Exit(BaseModel)
+</code></pre>
+<p>Represents an exit from one room to another.</p>
+<p><a id="models.Exit.required_level"></a></p>
+<h4>required_level</h4>
+<p>New: level requirement</p>
+<p><a id="models.Exit.required_items"></a></p>
+<h4>required_items</h4>
+<p>New: items needed to pass</p>
+<p><a id="models.Room"></a></p>
+<h2>Room Objects</h2>
+<pre><code class="language-python">class Room(BaseModel)
+</code></pre>
+<p>Represents a room in the game world.</p>
+<p><a id="models.Room.items"></a></p>
+<h4>items</h4>
+<p>Item IDs</p>
+<p><a id="models.Room.npcs"></a></p>
+<h4>npcs</h4>
+<p>NPC IDs</p>
+<p><a id="models.Room.enemies"></a></p>
+<h4>enemies</h4>
+<p>Enemy IDs</p>
+<p><a id="models.Room.weather_effects"></a></p>
+<h4>weather_effects</h4>
+<p>New: weather-specific effects</p>
+<p><a id="models.Room.is_safe_zone"></a></p>
+<h4>is_safe_zone</h4>
+<p>New: no combat allowed</p>
+<p><a id="models.Room.respawn_rate"></a></p>
+<h4>respawn_rate</h4>
+<p>New: enemy respawn rate in minutes</p>
+<p><a id="models.Player"></a></p>
+<h2>Player Objects</h2>
+<pre><code class="language-python">class Player(BaseModel)
+</code></pre>
+<p>Represents the player character.</p>
+<p><a id="models.Player.inventory"></a></p>
+<h4>inventory</h4>
+<p>Item IDs</p>
+<p><a id="models.Player.status_effects"></a></p>
+<h4>status_effects</h4>
+<p>effect: duration</p>
+<p><a id="models.Player.active_quests"></a></p>
+<h4>active_quests</h4>
+<p>Quest IDs</p>
+<p><a id="models.NPC"></a></p>
+<h2>NPC Objects</h2>
+<pre><code class="language-python">class NPC(BaseModel)
+</code></pre>
+<p>Represents a non-player character.</p>
+<p><a id="models.NPC.schedule"></a></p>
+<h4>schedule</h4>
+<p>time: room_id</p>
+<p><a id="models.NPC.quests_offered"></a></p>
+<h4>quests_offered</h4>
+<p>Quest IDs</p>
+<p><a id="models.NPC.shop_items"></a></p>
+<h4>shop_items</h4>
+<p>Items for sale</p>
+<p><a id="models.NPC.shop_prices"></a></p>
+<h4>shop_prices</h4>
+<p>item_id: price</p>
+<p><a id="models.NPC.reputation"></a></p>
+<h4>reputation</h4>
+<p>Player's reputation with this NPC</p>
+<p><a id="models.Weather"></a></p>
+<h2>Weather Objects</h2>
+<pre><code class="language-python">class Weather(BaseModel)
+</code></pre>
+<p>Represents current weather conditions.</p>
+<p><a id="models.Weather.temperature"></a></p>
+<h4>temperature</h4>
+<p>Celsius</p>
+<p><a id="models.Weather.visibility"></a></p>
+<h4>visibility</h4>
+<p>Percentage</p>
+<p><a id="models.TimeSystem"></a></p>
+<h2>TimeSystem Objects</h2>
+<pre><code class="language-python">class TimeSystem(BaseModel)
+</code></pre>
+<p>Represents the game's time system.</p>
+<p><a id="models.TimeSystem.time_scale"></a></p>
+<h4>time_scale</h4>
+<p>Minutes per real second</p>
+<p><a id="models.CraftingRecipe"></a></p>
+<h2>CraftingRecipe Objects</h2>
+<pre><code class="language-python">class CraftingRecipe(BaseModel)
+</code></pre>
+<p>Represents a crafting recipe.</p>
+<p><a id="models.CraftingRecipe.materials"></a></p>
+<h4>materials</h4>
+<p>item_id: quantity</p>
+<p><a id="models.CraftingRecipe.crafting_time"></a></p>
+<h4>crafting_time</h4>
+<p>in minutes</p>
+<p><a id="models.GameState"></a></p>
+<h2>GameState Objects</h2>
+<pre><code class="language-python">class GameState(BaseModel)
+</code></pre>
+<p>Represents the current state of the game.</p>
+<p><a id="combat"></a></p>
+<h1>combat</h1>
+<p>Combat system for the text adventure game.</p>
+<p><a id="combat.CombatSystem"></a></p>
+<h2>CombatSystem Objects</h2>
+<pre><code class="language-python">class CombatSystem()
+</code></pre>
+<p>Handles combat between player and enemies.</p>
+<p><a id="combat.CombatSystem.__init__"></a></p>
+<h4>__init__</h4>
+<pre><code class="language-python">def __init__(game_state: GameState) -&gt; None
+</code></pre>
+<p>Initialize the combat system.</p>
+<p><a id="combat.CombatSystem.start_combat"></a></p>
+<h4>start_combat</h4>
+<pre><code class="language-python">def start_combat(enemy_id: str) -&gt; str
+</code></pre>
+<p>Start combat with an enemy.</p>
+<p><a id="combat.CombatSystem.attack"></a></p>
+<h4>attack</h4>
+<pre><code class="language-python">def attack(target_name: str = &quot;&quot;) -&gt; str
+</code></pre>
+<p>Player attacks an enemy.</p>
+<p><a id="combat.CombatSystem.flee"></a></p>
+<h4>flee</h4>
+<pre><code class="language-python">def flee() -&gt; str
+</code></pre>
+<p>Attempt to flee from combat.</p>
+<p><a id="combat.CombatSystem.use_item"></a></p>
+<h4>use_item</h4>
+<pre><code class="language-python">def use_item(item_name: str) -&gt; str
+</code></pre>
+<p>Use an item during combat.</p>
+<p><a id="combat.CombatSystem.get_combat_status"></a></p>
+<h4>get_combat_status</h4>
+<pre><code class="language-python">def get_combat_status() -&gt; str
+</code></pre>
+<p>Get current combat status.</p>
+<p><a id="quests"></a></p>
+<h1>quests</h1>
+<p>Quest system for the text adventure game.</p>
+<p><a id="quests.QuestSystem"></a></p>
+<h2>QuestSystem Objects</h2>
+<pre><code class="language-python">class QuestSystem()
+</code></pre>
+<p>Handles quest management and progression.</p>
+<p><a id="quests.QuestSystem.__init__"></a></p>
+<h4>__init__</h4>
+<pre><code class="language-python">def __init__(game_state: GameState) -&gt; None
+</code></pre>
+<p>Initialize the quest system.</p>
+<p><a id="quests.QuestSystem.get_available_quests"></a></p>
+<h4>get_available_quests</h4>
+<pre><code class="language-python">def get_available_quests() -&gt; List[Quest]
+</code></pre>
+<p>Get quests available to the player.</p>
+<p><a id="quests.QuestSystem.accept_quest"></a></p>
+<h4>accept_quest</h4>
+<pre><code class="language-python">def accept_quest(quest_name: str) -&gt; str
+</code></pre>
+<p>Accept a quest from an NPC.</p>
+<p><a id="quests.QuestSystem.check_quest_progress"></a></p>
+<h4>check_quest_progress</h4>
+<pre><code class="language-python">def check_quest_progress() -&gt; str
+</code></pre>
+<p>Check progress on all active quests.</p>
+<p><a id="quests.QuestSystem.list_quests"></a></p>
+<h4>list_quests</h4>
+<pre><code class="language-python">def list_quests() -&gt; str
+</code></pre>
+<p>List all quests and their status.</p>
+<p><a id="quests.QuestSystem.get_quest_details"></a></p>
+<h4>get_quest_details</h4>
+<pre><code class="language-python">def get_quest_details(quest_name: str) -&gt; str
+</code></pre>
+<p>Get detailed information about a quest.</p>
+<p><a id="world_builder"></a></p>
+<h1>world_builder</h1>
+<p>World builder for creating the game world.</p>
+<p><a id="world_builder.WorldBuilder"></a></p>
+<h2>WorldBuilder Objects</h2>
+<pre><code class="language-python">class WorldBuilder()
+</code></pre>
+<p>Builds the game world with rooms, items, and NPCs.</p>
+<p><a id="world_builder.WorldBuilder.create_world"></a></p>
+<h4>create_world</h4>
+<pre><code class="language-python">def create_world() -&gt; GameState
+</code></pre>
+<p>Create a complete game world.</p>
+<p><a id="save_system"></a></p>
+<h1>save_system</h1>
+<p>Save and load system for the text adventure game.</p>
+<p><a id="save_system.SaveSystem"></a></p>
+<h2>SaveSystem Objects</h2>
+<pre><code class="language-python">class SaveSystem()
+</code></pre>
+<p>Handles saving and loading game states.</p>
+<p><a id="save_system.SaveSystem.__init__"></a></p>
+<h4>__init__</h4>
+<pre><code class="language-python">def __init__(save_directory: str = &quot;saves&quot;) -&gt; None
+</code></pre>
+<p>Initialize the save system.</p>
+<p><a id="save_system.SaveSystem.save_game"></a></p>
+<h4>save_game</h4>
+<pre><code class="language-python">def save_game(game_state: GameState, save_name: str = &quot;autosave&quot;) -&gt; bool
+</code></pre>
+<p>Save the current game state to a file.</p>
+<p><a id="save_system.SaveSystem.load_game"></a></p>
+<h4>load_game</h4>
+<pre><code class="language-python">def load_game(save_name: str) -&gt; Optional[GameState]
+</code></pre>
+<p>Load a game state from a file.</p>
+<p><a id="save_system.SaveSystem.list_saves"></a></p>
+<h4>list_saves</h4>
+<pre><code class="language-python">def list_saves() -&gt; List[Dict[str, Any]]
+</code></pre>
+<p>List all available save files.</p>
+<p><a id="save_system.SaveSystem.delete_save"></a></p>
+<h4>delete_save</h4>
+<pre><code class="language-python">def delete_save(save_name: str) -&gt; bool
+</code></pre>
+<p>Delete a save file.</p>
+<p><a id="save_system.SaveSystem.create_backup"></a></p>
+<h4>create_backup</h4>
+<pre><code class="language-python">def create_backup(game_state: GameState) -&gt; bool
+</code></pre>
+<p>Create a backup save.</p>
+<p><a id="save_system.SaveSystem.get_save_info"></a></p>
+<h4>get_save_info</h4>
+<pre><code class="language-python">def get_save_info(save_name: str) -&gt; Optional[Dict[str, Any]]
+</code></pre>
+<p>Get detailed information about a save file.</p>
+<p><a id="save_system.SaveSystem.export_save"></a></p>
+<h4>export_save</h4>
+<pre><code class="language-python">def export_save(save_name: str, export_path: str) -&gt; bool
+</code></pre>
+<p>Export a save file to a different location.</p>
+<p><a id="save_system.SaveSystem.import_save"></a></p>
+<h4>import_save</h4>
+<pre><code class="language-python">def import_save(import_path: str, save_name: str = None) -&gt; bool
+</code></pre>
+<p>Import a save file from a different location.</p>
+<p><a id="crafting"></a></p>
+<h1>crafting</h1>
+<p>Crafting system for the text adventure game.</p>
+<p><a id="crafting.CraftingSystem"></a></p>
+<h2>CraftingSystem Objects</h2>
+<pre><code class="language-python">class CraftingSystem()
+</code></pre>
+<p>Handles item crafting and recipe management.</p>
+<p><a id="crafting.CraftingSystem.__init__"></a></p>
+<h4>__init__</h4>
+<pre><code class="language-python">def __init__(game_state: GameState) -&gt; None
+</code></pre>
+<p>Initialize the crafting system.</p>
+<p><a id="crafting.CraftingSystem.get_available_recipes"></a></p>
+<h4>get_available_recipes</h4>
+<pre><code class="language-python">def get_available_recipes() -&gt; List[CraftingRecipe]
+</code></pre>
+<p>Get recipes the player can craft.</p>
+<p><a id="crafting.CraftingSystem.craft_item"></a></p>
+<h4>craft_item</h4>
+<pre><code class="language-python">def craft_item(recipe_name: str) -&gt; str
+</code></pre>
+<p>Craft an item using a recipe.</p>
+<p><a id="crafting.CraftingSystem.learn_recipe"></a></p>
+<h4>learn_recipe</h4>
+<pre><code class="language-python">def learn_recipe(recipe_id: str) -&gt; str
+</code></pre>
+<p>Learn a new crafting recipe.</p>
+<p><a id="crafting.CraftingSystem.get_recipe_info"></a></p>
+<h4>get_recipe_info</h4>
+<pre><code class="language-python">def get_recipe_info(recipe_name: str) -&gt; str
+</code></pre>
+<p>Get detailed information about a recipe.</p>
+<p><a id="crafting.CraftingSystem.list_recipes"></a></p>
+<h4>list_recipes</h4>
+<pre><code class="language-python">def list_recipes() -&gt; str
+</code></pre>
+<p>List all known recipes.</p>
+<p><a id="engine"></a></p>
+<h1>engine</h1>
+<p>Main game engine for the text adventure game.</p>
+<p><a id="engine.CommandHistory"></a></p>
+<h2>CommandHistory Objects</h2>
+<pre><code class="language-python">class CommandHistory()
+</code></pre>
+<p>Handles command history for the game.</p>
+<p><a id="engine.CommandHistory.__init__"></a></p>
+<h4>__init__</h4>
+<pre><code class="language-python">def __init__(history_file: str = &quot;.game_history&quot;) -&gt; None
+</code></pre>
+<p>Initialize command history.</p>
+<p><a id="engine.CommandHistory.save_history"></a></p>
+<h4>save_history</h4>
+<pre><code class="language-python">def save_history() -&gt; None
+</code></pre>
+<p>Save command history to file.</p>
+<p><a id="engine.CommandHistory.add_command"></a></p>
+<h4>add_command</h4>
+<pre><code class="language-python">def add_command(command: str) -&gt; None
+</code></pre>
+<p>Add a command to history.</p>
+<p><a id="engine.CommandHistory.get_history"></a></p>
+<h4>get_history</h4>
+<pre><code class="language-python">def get_history() -&gt; List[str]
+</code></pre>
+<p>Get the current command history.</p>
+<p><a id="engine.CommandHistory.clear_history"></a></p>
+<h4>clear_history</h4>
+<pre><code class="language-python">def clear_history() -&gt; None
+</code></pre>
+<p>Clear the command history.</p>
+<p><a id="engine.GameEngine"></a></p>
+<h2>GameEngine Objects</h2>
+<pre><code class="language-python">class GameEngine()
+</code></pre>
+<p>Main game engine that manages the game state and logic.</p>
+<p><a id="engine.GameEngine.__init__"></a></p>
+<h4>__init__</h4>
+<pre><code class="language-python">def __init__(no_color: bool = False) -&gt; None
+</code></pre>
+<p>Initialize the game engine.</p>
+<p><a id="engine.GameEngine.start_game"></a></p>
+<h4>start_game</h4>
+<pre><code class="language-python">def start_game() -&gt; None
+</code></pre>
+<p>Start the game and display the initial room.</p>
+<p><a id="engine.GameEngine.get_player_status"></a></p>
+<h4>get_player_status</h4>
+<pre><code class="language-python">def get_player_status() -&gt; str
+</code></pre>
+<p>Get a formatted status display for the player.</p>
+<p><a id="engine.GameEngine.save_game"></a></p>
+<h4>save_game</h4>
+<pre><code class="language-python">def save_game(save_name: str) -&gt; bool
+</code></pre>
+<p>Save the current game state.</p>
+<p><a id="engine.GameEngine.load_game"></a></p>
+<h4>load_game</h4>
+<pre><code class="language-python">def load_game(save_name: str) -&gt; bool
+</code></pre>
+<p>Load a game state.</p>
+<p><a id="engine.GameEngine.list_saves"></a></p>
+<h4>list_saves</h4>
+<pre><code class="language-python">def list_saves() -&gt; List[str]
+</code></pre>
+<p>List available save files.</p>
+<p><a id="engine.GameEngine.delete_save"></a></p>
+<h4>delete_save</h4>
+<pre><code class="language-python">def delete_save(save_name: str) -&gt; bool
+</code></pre>
+<p>Delete a save file.</p>
+<p><a id="engine.GameEngine.create_backup"></a></p>
+<h4>create_backup</h4>
+<pre><code class="language-python">def create_backup(save_name: str) -&gt; bool
+</code></pre>
+<p>Create a backup of a save file.</p>
+<p><a id="engine.GameEngine.get_save_info"></a></p>
+<h4>get_save_info</h4>
+<pre><code class="language-python">def get_save_info(save_name: str) -&gt; Optional[Dict[str, Any]]
+</code></pre>
+<p>Get information about a save file.</p>
+<p><a id="visuals"></a></p>
+<h1>visuals</h1>
+<p>Visuals for the text adventure game.</p>
+<p><a id="visuals.Visuals"></a></p>
+<h2>Visuals Objects</h2>
+<pre><code class="language-python">class Visuals()
+</code></pre>
+<p>Handles all visuals for the game.</p>
+<p><a id="visuals.Visuals.get_room_visual"></a></p>
+<h4>get_room_visual</h4>
+<pre><code class="language-python">@classmethod
+def get_room_visual(cls, room, npcs, enemies) -&gt; str
+</code></pre>
+<p>Get the visual representation of a room.</p>
+<p><a id="visuals.Visuals.get_title_banner"></a></p>
+<h4>get_title_banner</h4>
+<pre><code class="language-python">@classmethod
+def get_title_banner(cls) -&gt; str
+</code></pre>
+<p>Get the game title banner.</p>
+<p><a id="visuals.Visuals.get_victory_banner"></a></p>
+<h4>get_victory_banner</h4>
+<pre><code class="language-python">@classmethod
+def get_victory_banner(cls) -&gt; str
+</code></pre>
+<p>Get the victory banner.</p>
+<p><a id="visuals.Visuals.get_game_over_banner"></a></p>
+<h4>get_game_over_banner</h4>
+<pre><code class="language-python">@classmethod
+def get_game_over_banner(cls) -&gt; str
+</code></pre>
+<p>Get the game over banner.</p>
+<p><a id="visuals.Visuals.get_room_decoration"></a></p>
+<h4>get_room_decoration</h4>
+<pre><code class="language-python">@classmethod
+def get_room_decoration(cls, room_id: str) -&gt; Optional[str]
+</code></pre>
+<p>Get room decoration art.</p>
+<p><a id="visuals.Visuals.get_enemy_art"></a></p>
+<h4>get_enemy_art</h4>
+<pre><code class="language-python">@classmethod
+def get_enemy_art(cls, enemy_type: str) -&gt; Optional[str]
+</code></pre>
+<p>Get enemy art.</p>
+<p><a id="visuals.Visuals.get_item_art"></a></p>
+<h4>get_item_art</h4>
+<pre><code class="language-python">@classmethod
+def get_item_art(cls, item_name: str) -&gt; Optional[str]
+</code></pre>
+<p>Get item art.</p>
+<p><a id="visuals.Visuals.get_npc_art"></a></p>
+<h4>get_npc_art</h4>
+<pre><code class="language-python">@classmethod
+def get_npc_art(cls, npc_name: str) -&gt; Optional[str]
+</code></pre>
+<p>Get NPC art.</p>
+<p><a id="visuals.Visuals.get_combat_art"></a></p>
+<h4>get_combat_art</h4>
+<pre><code class="language-python">@classmethod
+def get_combat_art(cls, action: str) -&gt; Optional[str]
+</code></pre>
+<p>Get combat action art.</p>
+<p><a id="visuals.Visuals.get_status_art"></a></p>
+<h4>get_status_art</h4>
+<pre><code class="language-python">@classmethod
+def get_status_art(cls, status: str) -&gt; Optional[str]
+</code></pre>
+<p>Get status effect art.</p>
+<p><a id="visuals.Visuals.create_box"></a></p>
+<h4>create_box</h4>
+<pre><code class="language-python">@classmethod
+def create_box(cls, title: str, content: str, width: int = 60) -&gt; str
+</code></pre>
+<p>Create a fancy box around content.</p>
+<p><a id="visuals.Visuals.create_separator"></a></p>
+<h4>create_separator</h4>
+<pre><code class="language-python">@classmethod
+def create_separator(cls, char: str = &quot;-&quot;, width: int = 60) -&gt; str
+</code></pre>
+<p>Create a separator line.</p>
+<p><a id="visuals.Visuals.center_text"></a></p>
+<h4>center_text</h4>
+<pre><code class="language-python">@classmethod
+def center_text(cls, text: str, width: int = 60) -&gt; str
+</code></pre>
+<p>Center text within a given width.</p>
+<p><a id="visuals.Visuals.create_progress_bar"></a></p>
+<h4>create_progress_bar</h4>
+<pre><code class="language-python">@classmethod
+def create_progress_bar(cls,
+                        current: int,
+                        maximum: int,
+                        width: int = 20,
+                        filled_char: str = &quot;#&quot;,
+                        empty_char: str = &quot; &quot;) -&gt; str
+</code></pre>
+<p>Create a visual progress bar.</p>
+<p><a id="visuals.Visuals.create_health_bar"></a></p>
+<h4>create_health_bar</h4>
+<pre><code class="language-python">@classmethod
+def create_health_bar(cls, current: int, maximum: int) -&gt; str
+</code></pre>
+<p>Create a health bar.</p>
+<p><a id="visuals.Visuals.create_experience_bar"></a></p>
+<h4>create_experience_bar</h4>
+<pre><code class="language-python">@classmethod
+def create_experience_bar(cls, current: int, maximum: int) -&gt; str
+</code></pre>
+<p>Create an experience bar.</p>
+<p><a id="visuals.Visuals.create_centered_box"></a></p>
+<h4>create_centered_box</h4>
+<pre><code class="language-python">@classmethod
+def create_centered_box(cls, title: str, content: str, width: int = 60) -&gt; str
+</code></pre>
+<p>Create a centered box with title and content.</p>
+<p><a id="commands"></a></p>
+<h1>commands</h1>
+<p>Command parsing and execution for the text adventure game.</p>
+<p><a id="commands.CommandParser"></a></p>
+<h2>CommandParser Objects</h2>
+<pre><code class="language-python">class CommandParser()
+</code></pre>
+<p>Parses and executes player commands.</p>
+<p><a id="commands.CommandParser.__init__"></a></p>
+<h4>__init__</h4>
+<pre><code class="language-python">def __init__(game_state: GameState,
+             command_history=None,
+             console=None) -&gt; None
+</code></pre>
+<p>Initialize the command parser with the game state.</p>
+<p><a id="commands.CommandParser.parse_and_execute"></a></p>
+<h4>parse_and_execute</h4>
+<pre><code class="language-python">def parse_and_execute(command: str) -&gt; Optional[str]
+</code></pre>
+<p>Parse a command string and execute the appropriate action.</p>

@@ -1,13 +1,16 @@
 README.md
 pyproject.toml
+setup.py
 game/__init__.py
-game/ascii_art.py
+game/ai_player.py
 game/combat.py
 game/commands.py
 game/crafting.py
+game/engine.py
 game/models.py
 game/quests.py
 game/save_system.py
+game/visuals.py
 game/world_builder.py
 tests/test_models.py
 text_adventure_game.egg-info/PKG-INFO
